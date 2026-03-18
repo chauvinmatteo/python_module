@@ -69,31 +69,58 @@ class LogProcessor(DataProcessor):
         message: str = parts[1]
         return f"{level} level detected: {message}"
 
-    def validate(self, data: str) -> bool:
-        if not isinstance(data, str):
-            return False
-        has_info: bool = "Error" in data or "INFO" in data
-        has_sep: bool = ":" in data
-        if has_info and has_sep:
+    def validate(self, data: Any) -> bool:
+        if isinstance(data, str) and ":" in data:
             print("Validation: Log entry verified")
             return True
         return False
 
     def format_output(self, result: str) -> str:
-        prefix: str = "[ALERT]" if "ERROR" in result else "[INFO]"
+        if "Error:" in result:
+            return f"Output: {result}"
+        prefix = "[ALERT]" if "ERROR" in result else "[INFO]"
         return f"Output: {prefix} {result}"
 
 
-def polymorphism_process(data: Any, processor: list[DataProcessor]) -> None:
-    for i in range(3):
-        data_processor: DataProcessor = processor[i]
-        try:
-            print(f"Result {i + 1}: {data_processor.process(data[i])}")
-        except Exception as e:
-            print(f"{e.__class__.__name__}: {e}")
-    print("\nFoundation systems online. Nexus ready for advanced streams.")
+def main() -> None:
+    print("=== CODE NEXUS - DATA PROCESSOR FOUNDATION ===")
+    print()
+    print("Initializing Numeric Processor...")
+    np = NumericProcessor()
+    val_n: list[int] = [1, 2, 3, 4, 5]
+    print(f"Processing data: {val_n}")
+    print(f"Output: {np.process(val_n)}")
+    print()
+    print("Initializing Text Processor...")
+    tp = TextProcessor()
+    val_t = "Hello Nexus World"
+    print(f"Processing data: \"{val_t}\"")
+    print(f"Output: {tp.process(val_t)}")
+    print()
+    print("Initializing Log Processor...")
+    lp = LogProcessor()
+    val_l = "ERROR: Connection timeout"
+    print(f"Processing data: \"{val_l}\"")
+    print(f"Output: {lp.format_output(lp.process(val_l))}")
+    print()
+    print("=== Polymorphic Processing Demo ===")
+    print()
+    print("Processing multiple data types through same interface...")
+    procs: list[NumericProcessor | TextProcessor |
+                LogProcessor] = [NumericProcessor(), TextProcessor(),
+                                 LogProcessor()]
+    datas: list[list[int] | str] = [[1, 2, 3], "Data streams",
+                                    "INFO: System ready"]
+    for i in range(len(procs)):
+        proc: NumericProcessor | TextProcessor | LogProcessor = procs[i]
+        data: list[int] | str = datas[i]
+        raw_result: str = proc.process(data)
+        final_string: str = proc.format_output(raw_result)
+        clean_result: str = final_string.replace("Output: ", "")
+        print(f"Result {i + 1}: {clean_result}")
+    print()
+    print("Foundation systems online. Nexus ready for advanced streams.")
 
 
-def main():
-    print("")
-    data: [ [1, 2, 3,\
+if __name__ == "__main__":
+    main()
