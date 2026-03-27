@@ -36,4 +36,3 @@ class CreatureCard(Card):
             "health": self.health
         })
         return card_info
-        
