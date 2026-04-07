@@ -1,21 +1,20 @@
-from ex0.factory import CreatureFactory
+from ex0 import Creature, CreatureFactory
 from ex1.capability import (
     Sproutling, Bloomelle, Shiftling, Morphagon,
-    TransformCapability, HealCapability
 )
 
 
 class HealingCreatureFactory(CreatureFactory):
-    def create_base(self) -> HealCapability:
+    def create_base(self) -> Creature:
         return Sproutling()
 
-    def create_evolved(self) -> HealCapability:
+    def create_evolved(self) -> Creature:
         return Bloomelle()
 
 
 class TransformCreatureFactory(CreatureFactory):
-    def create_base(self) -> TransformCapability:
+    def create_base(self) -> Creature:
         return Shiftling()
 
-    def create_evolved(self) -> TransformCapability:
+    def create_evolved(self) -> Creature:
         return Morphagon()
