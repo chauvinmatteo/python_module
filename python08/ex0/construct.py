@@ -23,7 +23,7 @@ def main() -> None:
     else:
         print("MATRIX STATUS: Welcome to the construct\n")
 
-        print("Current python: {sys.executable}")
+        print(f"Current python: {sys.executable}")
         print(f"Virtual Environment: {os.path.basename(sys.prefix)}")
         print(f"Environment Path: {sys.prefix}\n")
 

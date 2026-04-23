@@ -20,14 +20,24 @@ def main() -> None:
     print("Configuration loaded:")
     print("Mode: " + (mode if mode
                       else "Missing mode"))
-    print("Database: " + ("Connected to local instance" if database
-                          else "Not connected"))
-    print("API Acces: " + ("Authenticated" if api_key
-                           else "Missing or Invalid"))
-    print("Log Level: " + (log_level if log_level
-                           else "Missing log level"))
-    print("Zion Network: " + ("Online" if zion_end
-                              else "Offline"))
+    if mode == "development":
+        print("Database: " + ("Connected to local instance" if database
+                              else "Not connected to a database"))
+        print("API Acces: " + ("Authenticated" if api_key
+                               else "Missing or Invalid"))
+        print("Log Level: " + (log_level if log_level
+                               else "Missing log level"))
+        print("Zion Network: " + ("Online" if zion_end
+                                  else "Offline"))
+    elif mode == "production":
+        print("Database: Connected to SECURE REMOTE CLUSTER" if database
+              else "Not connected to a database")
+        print("API Access: Authenticated (RESTRICTED PERMISSIONS)" if api_key
+              else "Missing or Invalid")
+        print("Log Level: " + (log_level if log_level
+                               else "Missing log level"))
+        print("Zion Network: " + ("Online (ENCRYPTED NETWORK)" if zion_end
+                                  else "Offline"))
 
     print("\nEnvironment security check:")
     print("[OK] No hardcoded secrets detected")
