@@ -24,12 +24,12 @@ class DataStream(ABC):
 
 
 class SensorStream(DataStream):
-    def __init__(self, stream_id) -> None:
+    def __init__(self, stream_id: str) -> None:
         super().__init__(stream_id)
         self.type = "Environmental Data"
         self.avg_temp: float = 0.0
 
-    def process_batch(self, data_batch) -> str:
+    def process_batch(self, data_batch: List[Any]) -> str:
         total_temp = 0.0
         count = 0
         for item in data_batch:
@@ -77,12 +77,12 @@ class SensorStream(DataStream):
 
 
 class TransactionStream(DataStream):
-    def __init__(self, stream_id) -> None:
+    def __init__(self, stream_id: str) -> None:
         super().__init__(stream_id)
         self.type = "Financial Data"
         self.net_flow: int = 0
 
-    def process_batch(self, data_batch) -> str:
+    def process_batch(self, data_batch: List[Any]) -> str:
         net_flow_amount: int = 0
         transaction: int = 0
         for item in data_batch:
@@ -133,12 +133,12 @@ class TransactionStream(DataStream):
 
 
 class EventStream(DataStream):
-    def __init__(self, stream_id) -> None:
+    def __init__(self, stream_id: str) -> None:
         super().__init__(stream_id)
         self.type = "System Events"
         self.error: int = 0
 
-    def process_batch(self, data_batch) -> str:
+    def process_batch(self, data_batch: List[Any]) -> str:
         event_count: int = 0
         for item in data_batch:
             try:
