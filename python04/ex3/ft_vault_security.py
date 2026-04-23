@@ -1,7 +1,6 @@
 def main() -> None:
     print("Initiating secure vault access...")
     print("Vault connection established with failsafe protocols\n")
-    file = None
     try:
         with open("classified_data.txt", "r") as file:
             print("SECURE EXTRACTION:")

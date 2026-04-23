@@ -2,9 +2,13 @@ import sys
 
 
 def main() -> None:
-    id_input: str = input("Input Stream active. Enter archivist ID: ")
-    status_input: str = input("Input Stream active. Enter status report: ")
+    print("Input Stream active. Enter archivist ID: ", end="")
+    id_input: str = input()
+
+    print("Input Stream active. Enter status report: ", end="")
+    status_input: str = input()
     print()
+
     print(f"[STANDARD] Archive status from {id_input}: {status_input}")
     print("[ALERT] System diagnostic: Communication channels verified",
           file=sys.stderr)

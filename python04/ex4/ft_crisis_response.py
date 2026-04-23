@@ -1,5 +1,6 @@
 def main() -> None:
     test_file = None
+
     try:
         test_file = "lost_archive.txt"
         print(f"CRISIS ALERT: Attempting access to '{test_file}'...")
@@ -10,6 +11,7 @@ def main() -> None:
         print("RESPONSE: Archive not found in storage matrix")
         print("STATUS: Crisis handled, system stable")
         print()
+
     try:
         test_file = "classified_vault.txt"
         print(f"CRISIS ALERT: Attempting access to '{test_file}'...")
@@ -20,6 +22,7 @@ def main() -> None:
         print("RESPONSE: Security protocols deny access")
         print("STATUS: Crisis handled, security maintained")
         print()
+
     try:
         test_file = "standard_archive.txt"
         print(f"ROUTINE ACCESS: Attempting access to '{test_file}'...")
@@ -31,6 +34,7 @@ def main() -> None:
         print("RESPONSE: Archive not found in storage matrix")
         print("STATUS: Crisis handled, system stable")
     print()
+
     print("All crisis scenarios handled successfully. Archives secure.")
 
 

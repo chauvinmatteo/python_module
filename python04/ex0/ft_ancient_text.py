@@ -5,14 +5,14 @@ def main() -> None:
     text = "ancient_fragment.txt"
     print(f"Accessing Storage Vault: {text}")
     try:
-        file: TextIOWrapper = open(text)
+        file: TextIOWrapper = open(text, "r")
         print("Connection established...")
         print()
         print("RECOVERED DATA:")
         print(file.read())
         print()
     except FileNotFoundError:
-        print("ERROR: Storage vault not found.")
+        print("ERROR: Storage vault not found. Run data generator first.")
     finally:
         if file is not None:
             file.close()
