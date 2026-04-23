@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, ValidationError
-from typing import Optional
+from typing import Optional, Any
 from datetime import datetime
 
 
@@ -18,7 +18,7 @@ def main() -> None:
     print("Space Station Data Validation")
     print("========================================")
     try:
-        valid_station = {
+        valid_station: dict[str, Any] = {
             "station_id": "ISS001",
             "name": "International Space Station",
             "crew_size": 6,
@@ -43,7 +43,7 @@ def main() -> None:
     print("\n========================================")
     print("Expected validation error:")
     try:
-        invalid_station = {
+        invalid_station: dict[str, Any] = {
             "station_id": "ISS001",
             "name": "International Space Station",
             "crew_size": 25,
@@ -55,6 +55,8 @@ def main() -> None:
         }
 
         station2 = SpaceStation(**invalid_station)
+        if station2:
+            print("The second station is valid as well")
     except ValidationError as e:
         print(e.errors()[0]['msg'])
 
