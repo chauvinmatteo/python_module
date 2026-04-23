@@ -49,7 +49,7 @@ def main() -> None:
     sorted = artifact_sorter(artifact)
     print(f"{sorted[0]['type']} {sorted[0]['name']} ({sorted[0]['power']} "
           f"power) comes before {sorted[1]['type']} {sorted[1]['name']} "
-          f"({sorted[0]['power']} power)\n")
+          f"({sorted[1]['power']} power)\n")
 
     print("Testing power filter...")
     mages: list[dict[str, str | int]] = [

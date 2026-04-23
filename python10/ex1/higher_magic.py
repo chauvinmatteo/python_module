@@ -49,7 +49,7 @@ def conditional_caster(condition: Callable, spell: Callable) -> Callable:
     return cond_cast
 
 
-def spell_sequence(spells: list[Callable]):
+def spell_sequence(spells: list[Callable]) -> Callable:
 
     if not all(callable(s) for s in spells):
         raise TypeError("Spell needs to be a function!")

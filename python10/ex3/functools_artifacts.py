@@ -2,8 +2,9 @@ from functools import reduce, partial, lru_cache, singledispatch
 from typing import Callable, Any
 import operator
 
+
 def spell_reducer(spells: list[int], operation: str) -> int:
-    ops = {
+    ops: dict[str, Callable[[int, int], int]] = {
         'add': operator.add,
         'multiply': operator.mul,
         'max': max,
@@ -59,12 +60,21 @@ def spell_dispatcher() -> Callable[[Any], str]:
 
 
 def main() -> None:
-    
+
     print("Testing spell reducer...")
-    powers = [10, 20, 30, 40]
-    print(f"Sum: {spell_reducer(powers, 'add')}")
-    print(f"Product: {spell_reducer(powers, 'multiply')}")
-    print(f"Max: {spell_reducer(powers, 'max')}")
+    try:
+        powers = [10, 20, 30, 40]
+        print(f"Sum: {spell_reducer(powers, 'add')}")
+        print(f"Product: {spell_reducer(powers, 'multiply')}")
+        print(f"Max: {spell_reducer(powers, 'max')}")
+    except ValueError as e:
+        print(f"Error: {e}")
+
+    print("Testing partial enchanter...")
+    enchant = partial_enchanter(base_enchantment)
+    print(enchant['fire'](target='Troll'))
+    print(enchant['ice'](target='Goblin'))
+    print(enchant['earth'](target='Dragon'))
 
     print("\nTesting memoized fibonacci...")
     for n in [0, 1, 10, 15]:
@@ -76,6 +86,7 @@ def main() -> None:
     print(dispatcher("fireball"))
     print(dispatcher([1, 2, 3]))
     print(dispatcher(3.14))
+
 
 if __name__ == "__main__":
     main()

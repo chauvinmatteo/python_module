@@ -1,6 +1,7 @@
 import time
 import functools
-from typing import Callable, Any
+from typing import Callable
+
 
 def spell_timer(func: Callable) -> Callable:
     @functools.wraps(func)
@@ -13,16 +14,19 @@ def spell_timer(func: Callable) -> Callable:
         return result
     return wrapper
 
+
 def power_validator(min_power: int) -> Callable:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            power = args[2] if len(args) > 2 else (args[0] if len(args) > 0 else 0)
+            power = (args[2] if len(args) > 2
+                     else (args[0] if len(args) > 0 else 0))
             if power >= min_power:
                 return func(*args, **kwargs)
             return "Insufficient power for this spell"
         return wrapper
     return decorator
+
 
 def retry_spell(max_attempts: int) -> Callable:
     def decorator(func: Callable) -> Callable:
@@ -32,10 +36,12 @@ def retry_spell(max_attempts: int) -> Callable:
                 try:
                     return func(*args, **kwargs)
                 except Exception:
-                    print(f"Spell failed, retrying... (attempt {attempt}/{max_attempts})")
+                    print(f"Spell failed, retrying... "
+                          f"(attempt {attempt}/{max_attempts})")
             return f"Spell casting failed after {max_attempts} attempts"
         return wrapper
     return decorator
+
 
 class MageGuild:
     @staticmethod
@@ -46,16 +52,19 @@ class MageGuild:
     def cast_spell(self, spell_name: str, power: int) -> str:
         return f"Successfully cast {spell_name} with {power} power"
 
+
 @spell_timer
 def fireball(power: int) -> str:
     time.sleep(0.1)
     return "Fireball cast!"
 
+
 @retry_spell(max_attempts=3)
 def unstable_spell():
     raise Exception("Mana leak")
 
-def main():
+
+def main() -> None:
     print("Testing spell timer...")
     res = fireball(50)
     print(f"Result: {res}")
@@ -70,6 +79,7 @@ def main():
     print(guild.validate_mage_name("Al"))
     print(guild.cast_spell("Lightning", 15))
     print(guild.cast_spell("Spark", 5))
+
 
 if __name__ == "__main__":
     main()
