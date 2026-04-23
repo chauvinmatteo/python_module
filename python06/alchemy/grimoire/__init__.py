@@ -1,2 +1,1 @@
-from .spellbook import record_spell # noqa
-from .validator import validate_ingredients # noqa
+from .light_spellbook import light_spell_record, light_spell_allowed_ingredients # noqa

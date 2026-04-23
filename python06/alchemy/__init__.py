@@ -1,4 +1,4 @@
-__version__ = "1.0.0"
-__author__ = "Master Pythonicus"
-
-from .elements import create_fire, create_water # noqa
+from .elements import create_air # noqa
+from .potions import healing_potion as heal # noqa
+from .potions import strength_potion # noqa
+from .transmutation.recipes import lead_to_gold # noqa
